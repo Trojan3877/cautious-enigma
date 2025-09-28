@@ -1,0 +1,38 @@
+---
+- name: Deploy AI-Powered Threat Detection System
+  hosts: threat_nodes
+  become: yes
+
+  vars:
+    app_dir: /opt/threat-detector
+    repo_url: https://github.com/yourusername/threat-detection-system.git
+    docker_image: threat-detector:latest
+
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Clone the repository
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ app_dir }}"
+        version: main
+
+    - name: Build Docker image
+      docker_image:
+        path: "{{ app_dir }}"
+        name: threat-detector
+        tag: latest
+        state: present
+
+    - name: Run Docker container
+      docker_container:
+        name: threat-detector
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "5000:5000"
