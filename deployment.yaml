@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threat-detector
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: threat-detector
+  template:
+    metadata:
+      labels:
+        app: threat-detector
+    spec:
+      containers:
+        - name: threat-detector
+          image: your-dockerhub/threat-detector:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: ALERT_WEBHOOK_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: threat-config
+                  key: ALERT_WEBHOOK_URL
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
