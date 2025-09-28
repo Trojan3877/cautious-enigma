@@ -7,3 +7,4 @@ joblib
 flask
 requests
 snowflake-connector-python
+pytest
