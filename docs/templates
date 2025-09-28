@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Threat Detection Dashboard</title>
+</head>
+<body>
+    <h1>Upload Log File</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="logfile">
+        <input type="submit" value="Detect Threats">
+    </form>
+
+    {% if threat_indices %}
+        <h2>Threats Detected at Indices:</h2>
+        <p>{{ threat_indices }}</p>
+    {% endif %}
+
+    {% if fig_html %}
+        <h2>Threat Visualization</h2>
+        {{ fig_html|safe }}
+    {% endif %}
+</body>
+</html>
