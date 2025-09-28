@@ -6,3 +6,4 @@ seaborn
 joblib
 flask
 requests
+snowflake-connector-python
