@@ -1,0 +1,5 @@
+k8s/
+├── deployment.yaml
+├── service.yaml
+├── configmap.yaml
+└── secret.yaml (optional)
