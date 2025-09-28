@@ -1,0 +1,5 @@
+apiVersion: v2
+name: threat-detector
+description: AI-powered threat detection system
+version: 0.1.0
+appVersion: "1.0"
