@@ -21,3 +21,20 @@ This project is a modular AI-powered threat detection system designed to identif
 
 ## 📁 Project Structure
 ├── config.py # Configuration settings ├── data_loader.py # Load and preprocess data ├── feature_engineering.py # Feature extraction logic ├── model.py # ML model training and loading ├── detector.py # Threat detection logic ├── alert.py # Alerting mechanism ├── main.py # Entry point ├── requirements.txt # Dependencies └── README.md # Project overview
+
+
+## 🚀 Getting Started
+1. Clone the repo  
+2. Install dependencies: `pip install -r requirements.txt`  
+3. Run the system: `python main.py`
+
+## 📬 Alerts
+Alerts are printed to console or sent via webhook/email (configurable).
+
+## 📈 Future Enhancements
+- Deep learning integration
+- Dashboard UI
+- Threat severity scoring
+- Integration with SIEM tools
+
+
