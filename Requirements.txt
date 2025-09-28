@@ -8,4 +8,4 @@ flask
 requests
 snowflake-connector-python
 pytest
-
+plotly
