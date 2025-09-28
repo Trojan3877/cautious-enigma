@@ -20,3 +20,4 @@ This project is a modular AI-powered threat detection system designed to identif
 - Joblib (for model persistence)
 
 ## 📁 Project Structure
+├── config.py # Configuration settings ├── data_loader.py # Load and preprocess data ├── feature_engineering.py # Feature extraction logic ├── model.py # ML model training and loading ├── detector.py # Threat detection logic ├── alert.py # Alerting mechanism ├── main.py # Entry point ├── requirements.txt # Dependencies └── README.md # Project overview
