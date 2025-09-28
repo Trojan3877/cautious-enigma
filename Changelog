@@ -1,0 +1,16 @@
+# 📜 Changelog
+
+## [1.0.0] - 2025-09-28
+### Added
+- Modular ML pipeline for threat detection
+- REST API and dashboard
+- Helm, Docker, Ansible, and K8s deployment
+- Snowflake integration
+- Test suite and Makefile
+- Contributor and security policies
+
+### Fixed
+- Timestamp parsing bug in `data_loader.py`
+
+### Changed
+- Default contamination rate in `model.py` from 0.05 to 0.1
