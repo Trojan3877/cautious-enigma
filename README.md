@@ -4,6 +4,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
 [![ML Capstone](https://img.shields.io/badge/ML-Capstone%20Project-purple)]()
+![Build Status](https://github.com/yourusername/threat-detection-system/actions/workflows/ci.yml/badge.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/yourusername/threat-detector)
+![Coverage](https://img.shields.io/codecov/c/github/yourusername/threat-detection-system)
+![License](https://img.shields.io/github/license/yourusername/threat-detection-system)
 
 ## 🚨 Overview
 A modular, production-ready AI system for real-time cybersecurity threat detection using machine learning. Designed for scalability, maintainability, and integration into enterprise environments.
