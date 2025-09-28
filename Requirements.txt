@@ -9,3 +9,4 @@ requests
 snowflake-connector-python
 pytest
 plotly
+pyyaml
