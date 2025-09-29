@@ -1,0 +1,38 @@
+[project]
+name = "threat-detector"
+version = "1.0.0"
+description = "AI-powered cybersecurity threat detection system"
+authors = [
+  { name="Corey", email="corey@example.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = [
+  "pandas",
+  "numpy",
+  "scikit-learn",
+  "flask",
+  "plotly",
+  "snowflake-connector-python",
+  "pyyaml",
+  "pytest"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/threat-detection-system"
+Issues = "https://github.com/yourusername/threat-detection-system/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["threat_detector*"]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Build the package
+python -m build
+
+# Install locally
+pip install .
