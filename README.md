@@ -1,16 +1,37 @@
 # 🛡️ AI-Powered Threat Detection System
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![ML Capstone](https://img.shields.io/badge/ML-Capstone%20Project-purple)]()
-![Build Status](https://github.com/yourusername/threat-detection-system/actions/workflows/ci.yml/badge.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/yourusername/threat-detector)
-![Coverage](https://img.shields.io/codecov/c/github/yourusername/threat-detection-system)
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-Production%20API-009688?logo=fastapi)
+![Docker](https://img.shields.io/badge/Docker-Ready-0db7ed?logo=docker)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Deployable-326ce5?logo=kubernetes)
+![Helm](https://img.shields.io/badge/Helm-Charts-0f1689?logo=helm)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?logo=terraform)
+![MLflow](https://img.shields.io/badge/Model%20Registry-Custom-green?logo=mlflow)
+![CI/CD](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-black?logo=githubactions)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Status](https://img.shields.io/badge/Status-Active-success)
+
 
 
 ## 🚨 Overview
-A modular, production-ready AI system for real-time cybersecurity threat detection using machine learning. Designed for scalability, maintainability, and integration into enterprise environments.
+Cautious Enigma is an enterprise-grade ML system designed to classify vehicle safety risk using structured sensor data.
+The project includes:
+
+Full L6-level ML architecture
+
+Production inference API built with FastAPI
+
+Model Registry with versioning & SHA256 fingerprints
+
+Preprocessing Pipeline (training + inference consistency)
+
+Training Orchestrator (Airflow/Kubeflow ready)
+
+Batch & real-time inference pipelines
+
+Kubernetes-ready deployment stack (Docker + Helm + Terraform)
+
+CI/CD compatible
 
 ## 🔧 Features
 - Log ingestion and preprocessing
@@ -30,8 +51,66 @@ A modular, production-ready AI system for real-time cybersecurity threat detecti
 - GitHub Actions (optional CI)
 
 ## 📁 Project Structure
-├── config.py ├── data_loader.py ├── feature_engineering.py ├── model.py ├── detector.py ├── alert.py ├── main.py ├── requirements.txt ├── README.md ├── tests/ │ └── test_pipeline.py ├── .github/ │ └── workflows/ │ └── ci.yml ├── Dockerfile └── .env
+cautious-enigma/
+│
+├── app/
+│   ├── api.py             # FastAPI server
+│   └── server.py          # Uvicorn entrypoint
+│
+├── models/
+│   ├── baseline_model.py  # Baseline ML classifier
+│   ├── inference.py       # Production inference engine
+│   └── model_trainer.py   # Training orchestrator
+│
+├── pipelines/
+│   ├── preprocess.py      # Full preprocessing pipeline
+│   ├── train_pipeline.py  # End-to-end training DAG
+│   └── inference_pipeline.py
+│
+├── utils/
+│   ├── config.py
+│   ├── data_loader.py
+│   ├── logger.py
+│   └── model_registry.py
+│
+├── config/
+│   └── config.yaml
+│
+└── Dockerfile
 
+
+                  ┌──────────────────────────┐
+                  │        config.yaml        │
+                  └─────────────┬────────────┘
+                                │
+              ┌─────────────────▼──────────────────┐
+              │       Data Loader (utils/)         │
+              └─────────────────┬──────────────────┘
+                                │
+                  ┌─────────────▼─────────────┐
+                  │   Preprocess Pipeline     │
+                  │ (training + inference)    │
+                  └─────────────┬─────────────┘
+                                │
+                ┌───────────────▼────────────────┐
+                │         Model Trainer           │
+                │ (Pipeline + Evaluation + Save)  │
+                └───────────────┬────────────────┘
+                                │
+                  ┌─────────────▼─────────────┐
+                  │     Model Registry         │
+                  │ (v1, v2, v3 + SHA256 hash) │
+                  └─────────────┬─────────────┘
+                                │
+                    ┌───────────▼────────────────┐
+                    │       Inference Engine      │
+                    └───────────┬────────────────┘
+                                │
+                ┌───────────────▼─────────────────┐
+                │             FastAPI              │
+                │  /predict   /batch_predict       │
+                │  /health    /ready    /live      │
+                └──────────────────────────────────┘
 
 ## 🚀 Getting Started
 
