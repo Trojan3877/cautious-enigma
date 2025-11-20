@@ -1,0 +1,84 @@
+# ===============================
+#   CONFIGURATION FILE (L5/L6)
+#   cautious-enigma
+# ===============================
+
+project:
+  name: "cautious-enigma"
+  version: "1.0.0"
+  author: "Corey Leath (Trojan3877)"
+  description: "A production-grade ML/AI system following L5/L6 engineering principles."
+
+paths:
+  data_dir: "data/"
+  raw_data: "data/raw/"
+  processed_data: "data/processed/"
+  model_dir: "models/"
+  logs_dir: "logs/"
+  artifacts_dir: "artifacts/"
+
+logging:
+  level: "INFO"
+  log_to_file: true
+  filename: "logs/system.log"
+  rotate_logs: true
+  max_log_size_mb: 50
+  backup_count: 5
+
+model:
+  framework: "pytorch"   # options: pytorch, tensorflow, sklearn
+  architecture: "mlp"    # configurable
+  hidden_layers: [128, 64]
+  activation: "relu"
+  dropout: 0.2
+  loss_function: "cross_entropy"
+
+training:
+  epochs: 20
+  batch_size: 32
+  learning_rate: 0.001
+  optimizer: "adam"
+  scheduler:
+    use_scheduler: true
+    step_size: 5
+    gamma: 0.5
+
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+  save_classification_report: true
+  confusion_matrix: true
+
+inference:
+  threshold: 0.5
+  batch_mode: true
+
+deployment:
+  docker:
+    base_image: "python:3.11-slim"
+    expose_port: 8000
+  fastapi:
+    enabled: true
+    host: "0.0.0.0"
+    port: 8000
+
+mlflow:
+  enabled: true
+  tracking_uri: "mlruns/"
+  experiment_name: "cautious_enigma_experiments"
+
+kubernetes:
+  enable: true
+  replicas: 2
+  image_pull_policy: "Always"
+  resources:
+    cpu: "500m"
+    memory: "1Gi"
+
+security:
+  enable_input_validation: true
+  sanitize_payloads: true
+  enforce_https: false
