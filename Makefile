@@ -3,7 +3,7 @@
 .PHONY: install test run docker-build docker-run clean
 
 install:
-    pip install -r requirements.txt
+    pip install -r Requirements.txt
 
 test:
     pytest tests/

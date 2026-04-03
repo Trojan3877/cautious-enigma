@@ -17,6 +17,29 @@ paths:
   logs_dir: "logs/"
   artifacts_dir: "artifacts/"
 
+data:
+  dataset_path: "data/logs.csv"
+  features:
+    - hour
+    - ip_freq
+    - suspicious_flag
+  label_col: "label"
+  test_size: 0.2
+  val_size: 0.1
+  random_state: 42
+
+models:
+  registry_dir: "models/registry"
+
+model:
+  name: "baseline"
+  framework: "sklearn"
+  architecture: "mlp"
+  hidden_layers: [128, 64]
+  activation: "relu"
+  dropout: 0.2
+  loss_function: "cross_entropy"
+
 logging:
   level: "INFO"
   log_to_file: true
@@ -24,14 +47,6 @@ logging:
   rotate_logs: true
   max_log_size_mb: 50
   backup_count: 5
-
-model:
-  framework: "pytorch"   # options: pytorch, tensorflow, sklearn
-  architecture: "mlp"    # configurable
-  hidden_layers: [128, 64]
-  activation: "relu"
-  dropout: 0.2
-  loss_function: "cross_entropy"
 
 training:
   epochs: 20
