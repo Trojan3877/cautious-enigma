@@ -1,5 +1,6 @@
 # api.py
 
+import pandas as pd
 from flask import Flask, request, jsonify
 from data_loader import preprocess_logs
 from feature_engineering import extract_features
