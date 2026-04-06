@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -34,6 +36,8 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     needs: test
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -43,6 +47,13 @@ jobs:
       - name: Smoke-test container health
         run: |
           docker run -d --name threat-detector-test -p 8000:8000 threat-detector:${{ github.sha }}
-          sleep 15
+          for i in $(seq 1 10); do
+            if curl --silent --fail http://localhost:8000/health; then
+              echo "Health check passed"
+              break
+            fi
+            echo "Waiting for container... attempt $i"
+            sleep 5
+          done
           curl --fail http://localhost:8000/health
           docker stop threat-detector-test
