@@ -4,21 +4,17 @@ FROM python:3.9-slim
 # Set working directory
 WORKDIR /app
 
+# Copy dependencies first for better layer caching
+COPY Requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r Requirements.txt
+
 # Copy project files
 COPY . .
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Expose FastAPI port
+EXPOSE 8000
 
-# Optional: expose port if using Flask API later
-EXPOSE 5000
-
-# Run the pipeline
-CMD ["python", "main.py"]
-
-
-# Build the image
-docker build -t threat-detector .
-
-# Run the container
-docker run --rm threat-detector
+# Run the FastAPI server
+CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
