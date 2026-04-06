@@ -3,28 +3,20 @@
 .PHONY: install test run docker-build docker-run clean
 
 install:
-    pip install -r Requirements.txt
+	pip install -r Requirements.txt
 
 test:
-    pytest tests/
+	pytest tests/
 
 run:
-    python main.py
+	python main.py
 
 docker-build:
-    docker build -t threat-detector .
+	docker build -t threat-detector .
 
 docker-run:
-    docker run --rm threat-detector
+	docker run --rm -p 8000:8000 threat-detector
 
 clean:
-    find . -type f -name "*.pyc" -delete
-    rm -rf __pycache__/
-
-
-make install        # Install dependencies
-make test           # Run test suite
-make run            # Execute pipeline
-make docker-build   # Build Docker image
-make docker-run     # Run container
-make clean          # Remove cache files
+	find . -type f -name "*.pyc" -delete
+	rm -rf __pycache__/
