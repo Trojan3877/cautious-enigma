@@ -3,6 +3,8 @@
 .pytest_cache
 .ruff_cache
 .venv
+__pycache__
+.cache
 artifacts
 htmlcov
 logs
@@ -10,4 +12,15 @@ mlruns
 models/registry
 tests
 *.pyc
+*.pyo
+*.pyd
+*.egg-info
 .env
+.env.*
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.whl
+node_modules
