@@ -8,12 +8,19 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 COPY Requirements.txt .
-RUN python -m pip install --upgrade \
+RUN apt-get update \
+    && apt-get upgrade -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
+    && python -m pip install --upgrade \
       "pip>=26.1,<27" \
-      "setuptools>=80.9,<81" \
+      "setuptools==80.10.2" \
       "wheel>=0.46.2,<0.47" \
       "jaraco.context>=6.1,<7" \
     && python -m pip install -r Requirements.txt \
+    && python -m pip install --upgrade --force-reinstall \
+      "msgpack==1.2.1" \
+      "setuptools==80.10.2" \
+    && python -m pip check \
     && groupadd --gid 10001 app \
     && useradd --uid 10001 --gid app --no-create-home --shell /usr/sbin/nologin app
 
