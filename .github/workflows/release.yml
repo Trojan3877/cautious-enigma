@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Existing semantic version tag to publish (for example v1.1.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref_name }}
+
+jobs:
+  github-release:
+    name: Publish GitHub Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate semantic tag
+        shell: bash
+        run: |
+          if [[ ! "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "RELEASE_TAG must look like v1.2.3; got '${RELEASE_TAG}'" >&2
+            exit 1
+          fi
+
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+
+      - name: Build source archive and checksum
+        shell: bash
+        run: |
+          mkdir -p dist
+          tar \
+            --exclude=.git \
+            --exclude=dist \
+            --exclude=.env \
+            -czf "dist/cautious-enigma-${RELEASE_TAG}.tar.gz" .
+          sha256sum "dist/cautious-enigma-${RELEASE_TAG}.tar.gz" > "dist/cautious-enigma-${RELEASE_TAG}.sha256"
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          generate_release_notes: true
+          files: |
+            dist/cautious-enigma-${{ env.RELEASE_TAG }}.tar.gz
+            dist/cautious-enigma-${{ env.RELEASE_TAG }}.sha256
