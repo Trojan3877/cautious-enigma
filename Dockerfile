@@ -17,6 +17,7 @@ RUN apt-get update \
     && python -m pip install --upgrade --force-reinstall "msgpack==1.2.1" \
     && python -m pip check \
     && python -m pip uninstall -y setuptools wheel \
+    && python -m pip uninstall -y pip \
     && rm -rf /root/.cache /tmp/* \
     && groupadd --gid 10001 app \
     && useradd --uid 10001 --gid app --no-create-home --shell /usr/sbin/nologin app
